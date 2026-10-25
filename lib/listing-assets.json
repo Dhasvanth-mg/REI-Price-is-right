@@ -66,5 +66,105 @@
     "/listings/miami-coral-gables/3.jpg",
     "/listings/miami-coral-gables/4.jpg",
     "/listings/miami-coral-gables/5.jpg"
+  ],
+  "roosevelt-v2": [
+    "/listings/roosevelt-v2/1.jpg",
+    "/listings/roosevelt-v2/2.jpg",
+    "/listings/roosevelt-v2/3.jpg",
+    "/listings/roosevelt-v2/4.jpg",
+    "/listings/roosevelt-v2/5.jpg",
+    "/listings/roosevelt-v2/6.jpg",
+    "/listings/roosevelt-v2/7.jpg",
+    "/listings/roosevelt-v2/8.jpg"
+  ],
+  "clarence-v2": [
+    "/listings/clarence-v2/1.jpg",
+    "/listings/clarence-v2/2.jpg",
+    "/listings/clarence-v2/3.jpg",
+    "/listings/clarence-v2/4.jpg",
+    "/listings/clarence-v2/5.jpg",
+    "/listings/clarence-v2/6.jpg",
+    "/listings/clarence-v2/7.jpg",
+    "/listings/clarence-v2/8.jpg"
+  ],
+  "centre-v2": [
+    "/listings/centre-v2/1.jpg",
+    "/listings/centre-v2/2.jpg",
+    "/listings/centre-v2/3.jpg",
+    "/listings/centre-v2/4.jpg",
+    "/listings/centre-v2/5.jpg",
+    "/listings/centre-v2/6.jpg",
+    "/listings/centre-v2/7.jpg",
+    "/listings/centre-v2/8.jpg"
+  ],
+  "billy-v2": [
+    "/listings/billy-v2/1.jpg",
+    "/listings/billy-v2/2.jpg",
+    "/listings/billy-v2/3.jpg",
+    "/listings/billy-v2/4.jpg",
+    "/listings/billy-v2/5.jpg",
+    "/listings/billy-v2/6.jpg",
+    "/listings/billy-v2/7.jpg",
+    "/listings/billy-v2/8.jpg"
+  ],
+  "rittenhouse-v2": [
+    "/listings/rittenhouse-v2/1.jpg",
+    "/listings/rittenhouse-v2/2.jpg",
+    "/listings/rittenhouse-v2/3.jpg",
+    "/listings/rittenhouse-v2/4.jpg",
+    "/listings/rittenhouse-v2/5.jpg",
+    "/listings/rittenhouse-v2/6.jpg",
+    "/listings/rittenhouse-v2/7.jpg",
+    "/listings/rittenhouse-v2/8.jpg"
+  ],
+  "page-v2": [
+    "/listings/page-v2/1.jpg",
+    "/listings/page-v2/2.jpg",
+    "/listings/page-v2/3.jpg",
+    "/listings/page-v2/4.jpg",
+    "/listings/page-v2/5.jpg",
+    "/listings/page-v2/6.jpg",
+    "/listings/page-v2/7.jpg",
+    "/listings/page-v2/8.jpg"
+  ],
+  "park-v2": [
+    "/listings/park-v2/1.jpg",
+    "/listings/park-v2/2.jpg",
+    "/listings/park-v2/3.jpg",
+    "/listings/park-v2/4.jpg",
+    "/listings/park-v2/5.jpg",
+    "/listings/park-v2/6.jpg",
+    "/listings/park-v2/7.jpg",
+    "/listings/park-v2/8.jpg"
+  ],
+  "miami-coral-gables-v2": [
+    "/listings/miami-coral-gables-v2/1.jpg",
+    "/listings/miami-coral-gables-v2/2.jpg",
+    "/listings/miami-coral-gables-v2/3.jpg",
+    "/listings/miami-coral-gables-v2/4.jpg",
+    "/listings/miami-coral-gables-v2/5.jpg",
+    "/listings/miami-coral-gables-v2/6.jpg",
+    "/listings/miami-coral-gables-v2/7.jpg",
+    "/listings/miami-coral-gables-v2/8.jpg"
+  ],
+  "la-spanish-v2": [
+    "/listings/la-spanish-v2/1.jpg",
+    "/listings/la-spanish-v2/2.jpg",
+    "/listings/la-spanish-v2/3.jpg",
+    "/listings/la-spanish-v2/4.jpg",
+    "/listings/la-spanish-v2/5.jpg",
+    "/listings/la-spanish-v2/6.jpg",
+    "/listings/la-spanish-v2/7.jpg",
+    "/listings/la-spanish-v2/8.jpg"
+  ],
+  "leaf-v2": [
+    "/listings/leaf-v2/1.webp",
+    "/listings/leaf-v2/2.webp",
+    "/listings/leaf-v2/3.webp",
+    "/listings/leaf-v2/4.webp",
+    "/listings/leaf-v2/5.webp",
+    "/listings/leaf-v2/6.webp",
+    "/listings/leaf-v2/7.webp",
+    "/listings/leaf-v2/8.webp"
   ]
 }

@@ -22,7 +22,8 @@ export function rankings(g: Game): Score[] {
         exact = 0,
         submitted = 0,
         streak = 0,
-        roundPoints = 0;
+        roundPoints = 0,
+        lastRoundPoints = 0;
       let current: Guess | undefined;
       g.rounds.forEach((r, i) => {
         if (!r.scored) return;
@@ -46,6 +47,7 @@ export function rankings(g: Game): Score[] {
           submitted++;
         }
         points += gained;
+        lastRoundPoints = gained;
         streak = gained >= 5 ? streak + 1 : 0;
         if (i === g.index) {
           roundPoints = gained;
@@ -59,6 +61,7 @@ export function rankings(g: Game): Score[] {
         team: p.team,
         points,
         roundPoints,
+        lastRoundPoints,
         error: submitted ? error / submitted : Infinity,
         exact,
         submitted,

@@ -80,6 +80,7 @@ export type Score = {
   team: string;
   points: number;
   roundPoints: number;
+  lastRoundPoints: number;
   error: number;
   exact: number;
   submitted: number;

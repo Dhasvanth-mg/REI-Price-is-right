@@ -31,7 +31,8 @@ import {
   transition,
   rankings,
 } from "@/lib/engine";
-import { defaults, emojis, type Game, type Property } from "@/lib/types";
+import { defaults, type Game, type Property } from "@/lib/types";
+import { avatarSchema } from "@/lib/emoji";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const codeSchema = z.string().regex(/^\d{6}$/, "Enter a six-digit room code.");
@@ -316,7 +317,7 @@ async function handle(req: NextRequest, segments: string[]) {
       const input = z
         .object({
           name: z.string(),
-          emoji: z.enum(emojis as [string, ...string[]]),
+          emoji: avatarSchema,
           team: z.string().max(24).default(""),
         })
         .parse(body);
@@ -398,7 +399,7 @@ async function handle(req: NextRequest, segments: string[]) {
           revision: z.number().int(),
           playerId: z.string().optional(),
           name: z.string().optional(),
-          emoji: z.string().optional(),
+          emoji: avatarSchema.optional(),
           bonus: z.number().int().min(-100).max(100).optional(),
         })
         .parse(body);
@@ -437,7 +438,7 @@ async function handle(req: NextRequest, segments: string[]) {
             )
               throw new Error("That name is taken.");
             p.name = name;
-            p.emoji = emojis.includes(input.emoji ?? "") ? input.emoji! : "🏡";
+            if (input.emoji !== undefined) p.emoji = input.emoji;
           }
           if (input.action === "bonus") p.bonus += input.bonus ?? 0;
         } else transition(g, input.action);

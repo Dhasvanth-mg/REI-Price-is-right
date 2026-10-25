@@ -46,17 +46,30 @@ function game(): Game {
         bonus: 0,
       },
     ],
-    rounds: seedProperties
-      .slice(0, 2)
-      .map((p) => ({
-        property: { ...p, price: 100000 },
-        guesses: [],
-        scored: false,
-      })),
+    rounds: seedProperties.slice(0, 2).map((p) => ({
+      property: { ...p, price: 100000 },
+      guesses: [],
+      scored: false,
+    })),
     commands: [],
   };
 }
 describe("scoring", () => {
+  it("keeps last-round points visible after advancing to the next property", () => {
+    const g = game();
+    transition(g, "start", 1000);
+    transition(g, "open", 2000);
+    acceptGuess(g, "a", 100000, "", false, 3000);
+    transition(g, "lock", 4000);
+    transition(g, "reveal", 5000);
+    expect(rankings(g).find((p) => p.id === "a")?.lastRoundPoints).toBe(15);
+    transition(g, "leaderboard", 6000);
+    transition(g, "next", 7000);
+    const p = rankings(g).find((p) => p.id === "a");
+    expect(p?.roundPoints).toBe(0);
+    expect(p?.lastRoundPoints).toBe(15);
+    expect(p?.points).toBe(15);
+  });
   it.each([
     [100000, 15],
     [102000, 10],

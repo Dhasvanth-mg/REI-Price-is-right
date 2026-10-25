@@ -123,6 +123,51 @@ function ErrorText({ message }: { message: string }) {
     </div>
   ) : null;
 }
+function AvatarPicker({
+  value,
+  onChange,
+  label = "Your emoji",
+}: {
+  value: string;
+  onChange: (emoji: string) => void;
+  label?: string;
+}) {
+  return (
+    <div className="avatar-picker">
+      <label className="field">
+        <span>{label}</span>
+        <div className="custom-emoji">
+          <span aria-hidden="true">{value || "🙂"}</span>
+          <input
+            aria-label={label}
+            value={value}
+            onChange={(event) => onChange(event.target.value)}
+            maxLength={64}
+            autoComplete="off"
+            spellCheck={false}
+            placeholder="Paste an emoji"
+            required
+          />
+        </div>
+      </label>
+      <small>Use your emoji keyboard or paste up to three emojis.</small>
+      <div className="emoji-picker">
+        {emojis.map((emoji) => (
+          <button
+            key={emoji}
+            type="button"
+            aria-label={`Choose ${emoji}`}
+            aria-pressed={value === emoji}
+            className={value === emoji ? "selected" : ""}
+            onClick={() => onChange(emoji)}
+          >
+            {emoji}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 function HouseArt({ className = "" }: { className?: string }) {
   return (
     <div className={"house-art " + className}>
@@ -199,23 +244,23 @@ function Landing() {
       <main>
         <section className="hero">
           <div className="hero-copy">
-            <Tag>THE RHO EPSILON IOTA GAME NIGHT</Tag>
+            <Tag>RHO EPSILON IOTA · PENN STATE</Tag>
             <h1>
-              Good eye.
+              The Price
               <br />
-              Better <em>guess.</em>
+              Is Right.
             </h1>
             <p>
-              From Happy Valley homes to a private island.
+              Guess the asking price of 10 real properties.
               <br />
-              Think you know what it’s worth? Prove it.
+              Join on your phone. Closest guesses score the most points.
             </p>
             <div className="hero-actions">
               <Link href="/join" className="button primary">
                 Join the game <ArrowUpRight size={19} />
               </Link>
               <Link href="/host" className="button secondary">
-                Take the host seat <ArrowRight size={18} />
+                Host a game <ArrowRight size={18} />
               </Link>
             </div>
             <div className="hero-meta">
@@ -223,39 +268,29 @@ function Landing() {
                 <span className="live-dot" /> Live multiplayer
               </span>
               <span>No account needed</span>
-              <span>Your phone is your buzzer</span>
+              <span>10 rounds</span>
             </div>
           </div>
           <div className="hero-visual">
-            <HouseArt />
+            <img
+              className="hero-photo"
+              src="/listings/leaf-v2/1.webp"
+              alt="Leaf Cay, the private island featured in the final round"
+            />
             <div className="visual-top">
-              <span>THE PRICE IS RIGHT</span>
-              <span>VOL. 01 / FALL ’26</span>
-            </div>
-            <div className="property-ticket">
-              <span className="ticket-icon">
-                <House size={25} />
-              </span>
-              <div>
-                <small>YOUR NEXT BIG GUESS</small>
-                <strong>
-                  Somewhere between
-                  <br />
-                  “a steal” and “no way.”
-                </strong>
-              </div>
-              <ArrowUpRight size={25} />
+              <span>ROUND 10</span>
+              <span>EXUMAS, BAHAMAS</span>
             </div>
             <div className="visual-bottom">
-              <MapPin size={14} /> STATE COLLEGE → THE BAHAMAS
-              <span>10 PROPERTIES</span>
+              <MapPin size={14} /> LEAF CAY PRIVATE ISLAND
+              <span>14 ACRES</span>
             </div>
           </div>
         </section>
         <section className="join-strip">
           <div>
-            <span className="mini-label">ALREADY GOT AN INVITE?</span>
-            <h2>Your seat is waiting.</h2>
+            <span className="mini-label">JOIN A ROOM</span>
+            <h2>Have a game code?</h2>
           </div>
           <form
             onSubmit={(e) => {
@@ -283,34 +318,28 @@ function Landing() {
         </section>
         <section className="how-section" id="how">
           <div className="section-heading">
-            <span className="eyebrow">
-              A LITTLE INSTINCT. A LITTLE COMPETITION.
-            </span>
-            <h2>
-              The market is a game.
-              <br />
-              This one has a leaderboard.
-            </h2>
+            <span className="eyebrow">HOW TO PLAY</span>
+            <h2>Three steps. Ten properties.</h2>
           </div>
           <div className="how-grid">
             {[
               {
                 n: "01",
                 icon: Users,
-                title: "Find your people.",
+                title: "Join the room",
                 text: "Scan the QR, pick a name and an emoji, and get in the room.",
               },
               {
                 n: "02",
                 icon: House,
-                title: "Trust your gut.",
+                title: "Check the property",
                 text: "Explore the property, check the details, and lock in your price.",
               },
               {
                 n: "03",
                 icon: Trophy,
-                title: "Climb the board.",
-                text: "The closer you get, the more you score. Every round is a fresh shot.",
+                title: "Submit your price",
+                text: "Points are based on how close your guess is. The leaderboard updates after each round.",
               },
             ].map((s) => (
               <article key={s.n}>
@@ -326,19 +355,15 @@ function Landing() {
         </section>
         <section className="finale-banner">
           <span className="eyebrow">THE GRAND FINALE</span>
-          <h2>
-            Yes, that last one
-            <br />
-            is a private island.
-          </h2>
-          <p>14 acres. Three beaches. One very big guess.</p>
+          <h2>The final round: Leaf Cay</h2>
+          <p>A 14-acre private island with three beaches and a dock.</p>
           <span className="outline-tag">EXUMAS, BAHAMAS · DOUBLE POINTS</span>
         </section>
       </main>
       <footer>
         <Brand />
-        <span>REAL ESTATE. REAL COMPETITION. REAL GOOD COMPANY.</span>
-        <span>PENN STATE · EST. RHO</span>
+        <span>RHO EPSILON IOTA · REAL ESTATE INVESTORS</span>
+        <span>PENN STATE</span>
       </footer>
     </div>
   );
@@ -356,12 +381,12 @@ function Join() {
       </header>
       <div className="join-layout">
         <div className="join-card">
-          <span className="eyebrow">YOU’RE IN GOOD COMPANY</span>
-          <h1>Come on in.</h1>
+          <span className="eyebrow">PLAYER ACCESS</span>
+          <h1>Join a game</h1>
           <p>
             Enter the room code on the big screen.
             <br />
-            Your next great guess starts here.
+            Then enter your name to join.
           </p>
           <form
             onSubmit={(e) => {
@@ -387,16 +412,19 @@ function Join() {
             </button>
           </form>
           <small>
-            <LockKeyhole size={13} /> No account. Just a name and a little
-            intuition.
+            <LockKeyhole size={13} /> Players do not need an account.
           </small>
         </div>
         <div className="join-art">
-          <HouseArt />
+          <img
+            className="hero-photo"
+            src="/listings/roosevelt-v2/1.jpg"
+            alt="State College home featured in the game"
+          />
           <div className="join-quote">
-            Location, location,
+            Rho Epsilon Iota
             <br />
-            <em>valuation.</em>
+            The Price Is Right
           </div>
         </div>
       </div>
@@ -427,11 +455,11 @@ function HostLogin({ onLogin }: { onLogin: () => void }) {
           <LockKeyhole />
         </span>
         <span className="eyebrow">THE HOST SEAT</span>
-        <h1>You run the show.</h1>
+        <h1>Admin sign-in</h1>
         <p>
-          Sign in to set the room, control the rounds,
+          Sign in to create rooms, manage players,
           <br />
-          and keep the competition friendly.
+          and control each round.
         </p>
         <form onSubmit={submit}>
           <label htmlFor="password">HOST PASSWORD</label>
@@ -620,7 +648,7 @@ function SettingsFields({
           {
             key: "closestUnder",
             title: "Closest without going over",
-            text: "Guesses above the asking price earn zero accuracy points.",
+            text: "Guesses above the asking price earn zero points.",
           },
           {
             key: "challenge",
@@ -630,7 +658,7 @@ function SettingsFields({
           {
             key: "wagerEnabled",
             title: "Double or nothing",
-            text: "Players can risk existing points on their accuracy.",
+            text: "Players can risk existing points on their next guess.",
           },
         ].map((t) => (
           <label className="toggle-row" key={t.key}>
@@ -658,7 +686,7 @@ function SettingsFields({
             onChange={(v) => change("wagerPoints", v)}
           />
           <NumberField
-            label="Accuracy threshold · % error"
+            label="Maximum error to win wager · %"
             value={value.wagerThreshold}
             min={0}
             max={100}
@@ -667,7 +695,7 @@ function SettingsFields({
         </div>
       )}
       <div className="scoring-settings">
-        <h3>The closer, the better.</h3>
+        <h3>Scoring</h3>
         <p className="muted">
           Percentage error makes a starter home and a private island a fair
           match.
@@ -777,11 +805,9 @@ function HostHome() {
     <>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">MAKE YOURSELF AT HOME</span>
-          <h1>Let’s get a room going.</h1>
-          <p>
-            Your properties. Their best guesses. One unforgettable game night.
-          </p>
+          <span className="eyebrow">ADMIN</span>
+          <h1>Host dashboard</h1>
+          <p>Create a game or open an existing room.</p>
         </div>
         <span className="date-label">
           THE HOST EDITION <ArrowUpRight size={17} />
@@ -814,8 +840,8 @@ function HostHome() {
               <Plus size={21} />
             </span>
             <div>
-              <h2>New game, fresh guesses.</h2>
-              <p>Set the vibe. We’ll handle the room code.</p>
+              <h2>Create a game</h2>
+              <p>Choose a name and set the round timer.</p>
             </div>
           </div>
           <label className="field">
@@ -848,20 +874,16 @@ function HostHome() {
           </Link>
           <ErrorText message={error} />
           <button disabled={busy} className="button primary full">
-            {busy ? "Setting the stage…" : "Create game room"}{" "}
+            {busy ? "Creating room…" : "Create game room"}{" "}
             <ArrowUpRight size={18} />
           </button>
           <span className="form-note">
-            <ShieldCheck size={14} /> A private answer key. A public good time.
+            <ShieldCheck size={14} /> Only admins can view unrevealed prices.
           </span>
         </form>
         <div className="host-guide">
-          <span className="eyebrow">HOST’S FIELD NOTES</span>
-          <h2>
-            A great game starts
-            <br />
-            with a good host.
-          </h2>
+          <span className="eyebrow">HOST INSTRUCTIONS</span>
+          <h2>Running a game</h2>
           {[
             "Create a room and put the QR code on the big screen.",
             "Give everyone a minute to choose their name and character.",
@@ -962,7 +984,7 @@ function SettingsPage() {
       <div className="page-heading">
         <div>
           <span className="eyebrow">SET THE HOUSE RULES</span>
-          <h1>Your game. Your pace.</h1>
+          <h1>Game settings</h1>
           <p>
             Defaults for new rooms on this browser. Active games keep their
             original settings.
@@ -1249,14 +1271,10 @@ function Leaderboard({
       <div className="board-heading">
         <div>
           <span className="eyebrow">
-            {final ? "THE FINAL WORD" : round ? "THIS ROUND" : "THE STANDINGS"}
+            {final ? "FINAL RESULTS" : round ? "ROUND RESULTS" : "STANDINGS"}
           </span>
           <h2>
-            {final
-              ? "A very good eye."
-              : round
-                ? "Closest to the keys."
-                : "A little friendly competition."}
+            {final ? "Final leaderboard" : round ? "This round" : "Leaderboard"}
           </h2>
         </div>
         <Trophy size={25} />
@@ -1275,13 +1293,13 @@ function Leaderboard({
       )}
       <div className="board-labels">
         <span>RANK / PLAYER</span>
-        <span>{round ? "GUESS / ERROR" : "ACCURACY"}</span>
+        <span>{round ? "GUESS / DIFFERENCE" : "LAST ROUND"}</span>
         <span>POINTS</span>
       </div>
       {rows.length === 0 ? (
         <div className="empty-state">
           <Trophy size={28} />
-          <p>The board is yours to fill.</p>
+          <p>No players yet.</p>
           <small>Players will appear as they join.</small>
         </div>
       ) : (
@@ -1300,7 +1318,7 @@ function Leaderboard({
                 {p.id === me && <small> YOU</small>}
               </strong>
               <small>
-                {p.team || "Independent appraiser"}
+                {p.team || "Player"}
                 {p.streak >= 2 ? ` · 🔥 ${p.streak} streak` : ""}
               </small>
             </div>
@@ -1314,10 +1332,8 @@ function Leaderboard({
                 ) : (
                   "No guess"
                 )
-              ) : Number.isFinite(p.error) ? (
-                `${p.error.toFixed(1)}% avg.`
               ) : (
-                "—"
+                `${(p.lastRoundPoints ?? p.roundPoints) >= 0 ? "+" : ""}${p.lastRoundPoints ?? p.roundPoints} pts`
               )}
             </span>
             <strong className="points">
@@ -1339,16 +1355,16 @@ function Lobby({ game, host = false }: { game: PublicGame; host?: boolean }) {
   return (
     <div className="lobby">
       <div className="lobby-invite">
-        <span className="eyebrow">THE DOOR IS OPEN</span>
+        <span className="eyebrow">WAITING ROOM</span>
         <h1>
-          A room full
+          Waiting for
           <br />
-          of possibilities.
+          players
         </h1>
         <p>
-          Scan. Join. Trust your gut.
+          Scan the QR code or enter the room code.
           <br />
-          We’ll take care of the rest.
+          The host will start when everyone is ready.
         </p>
         <div className="room-code-box">
           <span>YOUR ROOM CODE</span>
@@ -1398,7 +1414,7 @@ function Lobby({ game, host = false }: { game: PublicGame; host?: boolean }) {
         </div>
         {game.settings.closestUnder && (
           <p className="rule-note">
-            Closest without going over: overbids earn zero accuracy points.
+            Closest without going over: overbids earn zero points.
           </p>
         )}
         {game.settings.wagerEnabled && (
@@ -1411,7 +1427,7 @@ function Lobby({ game, host = false }: { game: PublicGame; host?: boolean }) {
       </div>
       <div className="lobby-players panel">
         <div className="panel-heading">
-          <h2>Look who’s home.</h2>
+          <h2>Players</h2>
           <span className="count-chip">
             {game.players.filter((p) => !p.banned).length} PLAYERS
           </span>
@@ -1434,7 +1450,7 @@ function Lobby({ game, host = false }: { game: PublicGame; host?: boolean }) {
           {!game.players.length && (
             <div className="empty-state">
               <Users size={32} />
-              <p>Good company is on the way.</p>
+              <p>Waiting for players</p>
               <small>Share the code to fill the room.</small>
             </div>
           )}
@@ -1442,7 +1458,7 @@ function Lobby({ game, host = false }: { game: PublicGame; host?: boolean }) {
         <div className="waiting-note">
           <span className="live-dot" />
           {host
-            ? "Your stage. Start whenever you’re ready."
+            ? "Start the game when everyone has joined."
             : "You’re in. The host will start the show."}
         </div>
       </div>
@@ -1478,8 +1494,8 @@ function PlayerJoin({
       <Brand />
       <form className="panel identity-form" onSubmit={join}>
         <span className="eyebrow">ROOM {game.code}</span>
-        <h1>Make an entrance.</h1>
-        <p>Pick your name. Find your character.</p>
+        <h1>Join the room</h1>
+        <p>Enter your name and choose an emoji.</p>
         <label className="field">
           <span>Your display name</span>
           <input
@@ -1489,25 +1505,11 @@ function PlayerJoin({
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Future homeowner"
+            placeholder="Your name"
             autoComplete="nickname"
           />
         </label>
-        <label>YOUR CHARACTER</label>
-        <div className="emoji-picker">
-          {emojis.map((x) => (
-            <button
-              aria-label={`Choose ${x}`}
-              aria-pressed={emoji === x}
-              className={emoji === x ? "selected" : ""}
-              type="button"
-              key={x}
-              onClick={() => setEmoji(x)}
-            >
-              {x}
-            </button>
-          ))}
-        </div>
+        <AvatarPicker value={emoji} onChange={setEmoji} />
         {game.settings.teamMode && (
           <label className="field">
             <span>Team name · first to join is captain</span>
@@ -1585,7 +1587,7 @@ function GuessForm({ game, reload }: { game: PublicGame; reload: () => void }) {
   }
   return (
     <form className="guess-form panel" onSubmit={submit}>
-      <span className="eyebrow">YOUR INSTINCT. YOUR NUMBER.</span>
+      <span className="eyebrow">YOUR GUESS</span>
       <h2>What’s the asking price?</h2>
       {game.settings.teamMode && !player?.captain ? (
         <p className="muted">
@@ -1775,8 +1777,8 @@ function PlayerScreen({
               <span className="eyebrow">
                 ROUND {String(game.index + 1).padStart(2, "0")} COMPLETE
               </span>
-              <h1>Every guess counts.</h1>
-              <p>The next property is just around the corner.</p>
+              <h1>Round complete</h1>
+              <p>Waiting for the host to start the next round.</p>
             </div>
             <Leaderboard rows={game.leaderboard} me={game.me?.id} />
           </>
@@ -1805,8 +1807,8 @@ function PlayerScreen({
               </div>
               {display ? (
                 <div className="display-progress panel">
-                  <span className="eyebrow">TRUST YOUR GUT</span>
-                  <h2>What’s it worth?</h2>
+                  <span className="eyebrow">SUBMISSIONS</span>
+                  <h2>What’s the asking price?</h2>
                   <strong>
                     {game.submitted}
                     <small>
@@ -1984,7 +1986,7 @@ function HostGame({ code }: { code: string }) {
             {game.phase === "lobby"
               ? "The room is filling up."
               : game.phase === "finished"
-                ? "That’s a wrap."
+                ? "Game finished"
                 : `Round ${game.index + 1} of ${game.total}`}
           </strong>
         </div>
@@ -2052,8 +2054,8 @@ function HostGame({ code }: { code: string }) {
       <section className="panel moderation-panel">
         <div className="panel-heading">
           <div>
-            <span className="eyebrow">KEEP IT FRIENDLY</span>
-            <h2>The people in your room.</h2>
+            <span className="eyebrow">PLAYER MANAGEMENT</span>
+            <h2>Manage players</h2>
           </div>
           <span className="count-chip">
             {game.players.filter((p) => !p.banned).length} ACTIVE
@@ -2180,19 +2182,11 @@ function HostGame({ code }: { code: string }) {
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
-            <div className="emoji-picker">
-              {emojis.map((e) => (
-                <button
-                  aria-label={`Choose ${e}`}
-                  aria-pressed={emoji === e}
-                  className={emoji === e ? "selected" : ""}
-                  onClick={() => setEmoji(e)}
-                  key={e}
-                >
-                  {e}
-                </button>
-              ))}
-            </div>
+            <AvatarPicker
+              value={emoji}
+              onChange={setEmoji}
+              label="Player emoji"
+            />
             <button
               className="button primary full"
               disabled={busy}
@@ -2318,7 +2312,7 @@ function PropertiesPage() {
       <div className="page-heading">
         <div>
           <span className="eyebrow">THE PROPERTY COLLECTION</span>
-          <h1>Every home has a number.</h1>
+          <h1>Property collection</h1>
           <p>
             A curated journey from Happy Valley to a private island. Make it
             your own.
@@ -2411,7 +2405,7 @@ function PropertiesPage() {
         >
           <Plus size={30} />
           <strong>Add a property</strong>
-          <small>The next great guess.</small>
+          <small>Add a property to the lineup.</small>
         </button>
       </div>
       {property && (
@@ -2430,7 +2424,7 @@ function PropertiesPage() {
               <X />
             </button>
             <span className="eyebrow">EDIT THE COLLECTION</span>
-            <h2 id="property-title">The details make the difference.</h2>
+            <h2 id="property-title">Edit property</h2>
             <div className="fields-grid">
               {(["address", "city", "category", "type", "source"] as const).map(
                 (k) => (

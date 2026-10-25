@@ -18,7 +18,7 @@ test("concurrent guesses, host authorization, idempotency, moderation, CSV and a
   const joined = await Promise.all(
     players.map((p, i) =>
       p.post(`/api/games/${code}/join`, {
-        data: { name: `Appraiser ${i}`, emoji: "🏡" },
+        data: { name: `Appraiser ${i}`, emoji: i === 0 ? "🧑🏽‍🚀" : "🏡" },
       }),
     ),
   );
@@ -62,6 +62,11 @@ test("concurrent guesses, host authorization, idempotency, moderation, CSV and a
   ).toBe(true);
   const publicView = await (await host.get(`/api/games/${code}`)).json();
   expect(publicView.submitted).toBe(8);
+  expect(
+    publicView.players.find(
+      (p: { name: string; emoji: string }) => p.name === "Appraiser 0",
+    ).emoji,
+  ).toBe("🧑🏽‍🚀");
   expect(publicView.property.price).toBeUndefined();
   expect(publicView.property.source).toBeUndefined();
   expect(
@@ -86,7 +91,7 @@ test("concurrent guesses, host authorization, idempotency, moderation, CSV and a
       await control("rename", {
         playerId: ids[0].id,
         name: "Friendly appraiser",
-        emoji: "🦊",
+        emoji: "🫠",
       })
     ).ok(),
   ).toBe(true);

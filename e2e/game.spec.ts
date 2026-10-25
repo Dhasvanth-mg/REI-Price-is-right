@@ -10,7 +10,10 @@ test("host and two players complete a round, moderate, and reconnect", async ({
   await expect(page).toHaveURL(/\/host\/\d{6}/);
   const code = page.url().split("/").pop()!;
   const baseURL = new URL(page.url()).origin;
-  const a = await browser.newContext({ baseURL });
+  const a = await browser.newContext({
+    baseURL,
+    viewport: { width: 390, height: 844 },
+  });
   const b = await browser.newContext({ baseURL });
   const alice = await a.newPage();
   const bob = await b.newPage();
@@ -20,8 +23,13 @@ test("host and two players complete a round, moderate, and reconnect", async ({
   ] as const) {
     await p.goto("/play/" + code);
     await p.getByLabel("Your display name").fill(name);
+    await p
+      .getByLabel("Your emoji", { exact: true })
+      .fill(name === "Alice" ? "👩🏽‍🚀" : "🫠");
     await p.getByRole("button", { name: "I’m in", exact: true }).click();
-    await expect(p.getByText("Look who’s home.")).toBeVisible();
+    await expect(
+      p.getByRole("heading", { name: "Players", exact: true }),
+    ).toBeVisible();
   }
   await expect(page.getByText("2 PLAYERS")).toBeVisible();
   await page
@@ -57,7 +65,7 @@ test("host and two players complete a round, moderate, and reconnect", async ({
     .getByRole("button", { name: "Show leaderboard", exact: true })
     .click();
   await expect(
-    bob.getByRole("heading", { name: "Every guess counts." }),
+    bob.getByRole("heading", { name: "Round complete" }),
   ).toBeVisible();
   await page
     .getByRole("button", { name: "Next property", exact: true })

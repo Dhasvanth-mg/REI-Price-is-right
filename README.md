@@ -16,7 +16,7 @@ Without Supabase, rooms and uploaded photos are stored in `.local/` on this comp
 3. In Project Settings → API, copy your project URL, anon/publishable key, and service role/secret key. Only the URL and anon key may be public. Keep the service role key private.
 4. Copy `.env.example` to `.env.local`; fill in those three Supabase settings. Set `ADMIN_PASSWORD` and a random 32+ character `SESSION_SECRET`. Restart the dev server.
 
-Run `npm run seed` after the migration to persist the ten-property catalog in Supabase. The SQL migration creates the Storage bucket and enables revision notifications through Realtime. The catalog editor supports photo upload and image ordering. The collection includes 46 actual listing photos, with sources in `public/listings/SOURCES.md`. The image manifest and local copies are committed so phones do not depend on listing-site requests during play. Unknown listing details stay unknown; island acreage is not presented as interior floor area. Prices are user-supplied snapshots and are never automatically refreshed. Pittsburgh and Philadelphia bedroom/bathroom counts have been verified against their listing pages.
+Run `npm run seed` after the migration to persist the ten-property catalog in Supabase. The SQL migration creates the Storage bucket and enables revision notifications through Realtime. The catalog editor supports photo upload and image ordering. The collection includes 80 actual listing photos (eight per property, including interiors), with sources in `docs/listing-photo-sources.md`. The image manifest and local copies are committed so phones do not depend on listing-site requests during play. Unknown listing details stay unknown; island acreage is not presented as interior floor area. Prices are user-supplied snapshots and are never automatically refreshed. Pittsburgh and Philadelphia bedroom/bathroom counts have been verified against their listing pages.
 
 ## Vercel setup
 
@@ -56,3 +56,5 @@ The Playwright test uses installed Microsoft Edge on Windows. It creates a host 
 ## Routes
 
 `/` landing · `/join` room code · `/play/[code]` participant · `/host` dashboard · `/host/[code]` controls · `/display/[code]` projector · `/results/[code]` current/final scores · `/admin/properties` catalog · `/admin/settings` defaults.
+
+The leaderboard shows last-round points alongside total points. Players can paste 1–3 emoji characters, including flags, skin tones, and combined emoji sequences. Hosts can edit these avatars in player management. Run node scripts/refresh-event-catalog.mjs after deploying the versioned gallery assets to update the catalog and live-room photos while keeping already-started game answers frozen.
