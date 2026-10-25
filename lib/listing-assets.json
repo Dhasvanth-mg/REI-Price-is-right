@@ -59,5 +59,12 @@
     "/listings/leaf/3.webp",
     "/listings/leaf/4.webp",
     "/listings/leaf/5.webp"
+  ],
+  "miami-coral-gables": [
+    "/listings/miami-coral-gables/1.jpg",
+    "/listings/miami-coral-gables/2.jpg",
+    "/listings/miami-coral-gables/3.jpg",
+    "/listings/miami-coral-gables/4.jpg",
+    "/listings/miami-coral-gables/5.jpg"
   ]
 }

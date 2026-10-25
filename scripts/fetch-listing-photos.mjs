@@ -3,8 +3,12 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 const manifest = JSON.parse(await readFile("lib/listing-photos.json", "utf8"));
-const assets = {};
+const assets = JSON.parse(
+  await readFile("lib/listing-assets.json", "utf8").catch(() => "{}"),
+);
+const selected = process.argv.slice(2);
 for (const [id, urls] of Object.entries(manifest)) {
+  if (selected.length && !selected.includes(id)) continue;
   const seen = new Set();
   const photos = urls.filter((url) => {
     const key = url.includes("zillowstatic")
