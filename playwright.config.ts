@@ -1,5 +1,5 @@
 import { defineConfig } from "@playwright/test";
-const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3000";
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3001";
 export default defineConfig({
   testDir: "./e2e",
   timeout: 90000,

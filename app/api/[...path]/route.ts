@@ -75,7 +75,10 @@ const propertySchema = z.object({
         .string()
         .max(2048)
         .refine(
-          (v) => v.startsWith("/api/photo/") || /^https:\/\//.test(v),
+          (v) =>
+            v.startsWith("/api/photo/") ||
+            /^\/listings\/[a-z0-9-]+\/[0-9]+\.(jpg|png|webp)$/.test(v) ||
+            /^https:\/\//.test(v),
           "Use an HTTPS image URL.",
         ),
     )
@@ -296,13 +299,11 @@ async function handle(req: NextRequest, segments: string[]) {
         paused: null,
         settings: s,
         players: [],
-        rounds: properties
-          .slice(0, s.roundCount)
-          .map((p) => ({
-            property: structuredClone(p),
-            guesses: [],
-            scored: false,
-          })),
+        rounds: properties.slice(0, s.roundCount).map((p) => ({
+          property: structuredClone(p),
+          guesses: [],
+          scored: false,
+        })),
         commands: [],
       };
       if (await createGame(g)) return response({ code: room });

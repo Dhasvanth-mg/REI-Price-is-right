@@ -1,0 +1,63 @@
+{
+  "roosevelt": [
+    "/listings/roosevelt/1.jpg",
+    "/listings/roosevelt/2.jpg",
+    "/listings/roosevelt/3.jpg",
+    "/listings/roosevelt/4.jpg",
+    "/listings/roosevelt/5.jpg"
+  ],
+  "clarence": [
+    "/listings/clarence/1.jpg",
+    "/listings/clarence/2.jpg",
+    "/listings/clarence/3.jpg",
+    "/listings/clarence/4.jpg",
+    "/listings/clarence/5.jpg"
+  ],
+  "centre": [
+    "/listings/centre/1.jpg",
+    "/listings/centre/2.jpg",
+    "/listings/centre/3.jpg",
+    "/listings/centre/4.jpg",
+    "/listings/centre/5.jpg"
+  ],
+  "billy": [
+    "/listings/billy/1.jpg",
+    "/listings/billy/2.jpg",
+    "/listings/billy/3.jpg",
+    "/listings/billy/4.jpg",
+    "/listings/billy/5.jpg"
+  ],
+  "rittenhouse": [
+    "/listings/rittenhouse/1.jpg",
+    "/listings/rittenhouse/2.jpg",
+    "/listings/rittenhouse/3.jpg",
+    "/listings/rittenhouse/4.jpg"
+  ],
+  "page": [
+    "/listings/page/1.jpg",
+    "/listings/page/2.jpg",
+    "/listings/page/3.jpg",
+    "/listings/page/4.jpg",
+    "/listings/page/5.jpg"
+  ],
+  "park": [
+    "/listings/park/1.jpg",
+    "/listings/park/2.jpg",
+    "/listings/park/3.jpg",
+    "/listings/park/4.jpg",
+    "/listings/park/5.jpg"
+  ],
+  "miami": [
+    "/listings/miami/1.jpg",
+    "/listings/miami/2.jpg",
+    "/listings/miami/3.jpg"
+  ],
+  "west": ["/listings/west/1.jpg", "/listings/west/2.jpg"],
+  "leaf": [
+    "/listings/leaf/1.webp",
+    "/listings/leaf/2.webp",
+    "/listings/leaf/3.webp",
+    "/listings/leaf/4.webp",
+    "/listings/leaf/5.webp"
+  ]
+}

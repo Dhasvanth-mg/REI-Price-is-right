@@ -1,6 +1,7 @@
 import type { Property } from "./types";
+import listingAssets from "./listing-assets.json";
 const z = (slug: string) => `https://www.zillow.com/homedetails/${slug}/`;
-export const seedProperties: Property[] = [
+const propertyRecords: Property[] = [
   {
     id: "roosevelt",
     address: "152 Roosevelt Ave",
@@ -38,8 +39,8 @@ export const seedProperties: Property[] = [
     city: "Pittsburgh, PA",
     category: "Pennsylvania",
     price: 1200000,
-    beds: null,
-    baths: null,
+    beds: 4,
+    baths: 3,
     sqft: 3500,
     type: "Residential",
     facts: ["Approximate floor area", "In the heart of the Steel City"],
@@ -66,8 +67,8 @@ export const seedProperties: Property[] = [
     city: "Philadelphia, PA",
     category: "Pennsylvania",
     price: 2590000,
-    beds: null,
-    baths: null,
+    beds: 3,
+    baths: 4,
     sqft: 2210,
     type: "Luxury condominium",
     facts: ["Approximate floor area", "High-rise living in Philadelphia"],
@@ -154,3 +155,8 @@ export const seedProperties: Property[] = [
       "https://www.christiesrealestate.com/homes/bahamas/exumas/leaf-cay-staniel-cay-exumas-bahamas/5XS11774/",
   },
 ];
+export const seedProperties: Property[] = propertyRecords.map((property) => ({
+  ...property,
+  images:
+    (listingAssets as Record<string, string[]>)[property.id] ?? property.images,
+}));

@@ -4,10 +4,10 @@ A real estate game night for Rho Epsilon Iota. Next.js, TypeScript, Supabase, an
 
 ## Run locally
 
-Install Node.js 22+, then run `npm install` and `npm run dev`. Open http://localhost:3000.
+Install Node.js 22+, then run `npm install` and `npm run dev`. Open http://localhost:3001.
 
 Host dashboard: `/host`. Default **development-only** password: `rho2026`.
-Without Supabase, rooms and uploaded photos are stored in `.local/` on this computer. This mode supports multiple phones on your LAN with one server process. The dev server listens on `0.0.0.0`; open `http://YOUR-WIFI-IP:3000/host` so QR codes use the LAN address. Allow TCP port 3000 through Windows Firewall for your local network. Guest networks with device isolation may prevent phones reaching the laptop.
+Without Supabase, rooms and uploaded photos are stored in `.local/` on this computer. This mode supports multiple phones on your LAN with one server process. The dev server listens on `0.0.0.0`; open `http://YOUR-WIFI-IP:3001/host` so QR codes use the LAN address. Allow TCP port 3001 through Windows Firewall for your local network. Guest networks with device isolation may prevent phones reaching the laptop.
 
 ## Supabase setup
 
@@ -16,7 +16,7 @@ Without Supabase, rooms and uploaded photos are stored in `.local/` on this comp
 3. In Project Settings → API, copy your project URL, anon/publishable key, and service role/secret key. Only the URL and anon key may be public. Keep the service role key private.
 4. Copy `.env.example` to `.env.local`; fill in those three Supabase settings. Set `ADMIN_PASSWORD` and a random 32+ character `SESSION_SECRET`. Restart the dev server.
 
-The ten provided property records are seeded on first catalog access. The SQL migration creates the Storage bucket and enables revision notifications through Realtime. The catalog editor supports photo upload and image ordering. Unknown listing details stay unknown; island acreage is not presented as interior floor area. Prices are user-supplied snapshots and are never automatically refreshed. Photographs are intentionally replaceable placeholders until the host uploads authorized imagery.
+Run `npm run seed` after the migration to persist the ten-property catalog in Supabase. The SQL migration creates the Storage bucket and enables revision notifications through Realtime. The catalog editor supports photo upload and image ordering. The collection includes 44 actual listing photos, with sources in `public/listings/SOURCES.md`. The image manifest and local copies are committed so phones do not depend on listing-site requests during play. Unknown listing details stay unknown; island acreage is not presented as interior floor area. Prices are user-supplied snapshots and are never automatically refreshed. Pittsburgh and Philadelphia bedroom/bathroom counts have been verified against their listing pages.
 
 ## Vercel setup
 
