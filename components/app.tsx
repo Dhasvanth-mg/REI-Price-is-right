@@ -95,7 +95,13 @@ async function api(url: string, body?: unknown) {
 function Brand() {
   return (
     <Link href="/" className="brand">
-      <span className="brand-mark">ρ</span>
+      <img
+        className="brand-logo"
+        src="/brand/rho-epsilon-iota.png"
+        alt="Rho Epsilon Iota — Real Estate Investors"
+        width={1161}
+        height={1055}
+      />
       <span>
         RHO EPSILON IOTA<small>THE PRICE IS RIGHT</small>
       </span>

@@ -247,18 +247,15 @@ form > label {
   gap: 12px;
   flex-shrink: 0;
 }
-.brand-mark {
-  font-family: Georgia, serif;
-  font-size: 38px;
-  width: 39px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #7b896c;
-  border-radius: 3px;
-  color: var(--gold);
-  line-height: 1;
-  padding-bottom: 6px;
+.brand-logo {
+  width: 66px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: white;
+  padding: 4px;
+  border-radius: 4px;
 }
 .brand > span:last-child {
   font-size: 11px;
@@ -781,10 +778,9 @@ footer .brand {
   font-size: 6px;
   letter-spacing: 2px;
 }
-.sidebar .brand-mark {
-  width: 33px;
-  height: 38px;
-  font-size: 31px;
+.sidebar .brand-logo {
+  width: 60px;
+  height: 55px;
 }
 .sidebar-label {
   font-size: 8px;
@@ -2634,10 +2630,9 @@ footer .brand {
     font-size: 5px;
     letter-spacing: 1px;
   }
-  .sidebar .brand-mark {
-    width: 29px;
-    height: 34px;
-    font-size: 27px;
+  .sidebar .brand-logo {
+    width: 50px;
+    height: 46px;
   }
   .sidebar .brand {
     gap: 7px;
@@ -2877,10 +2872,10 @@ footer .brand {
     padding: 18px 20px;
     height: 80px;
   }
-  .brand-mark {
-    width: 32px;
-    height: 36px;
-    font-size: 32px;
+  .brand-logo {
+    width: 48px;
+    height: 44px;
+    padding: 3px;
   }
   .brand > span:last-child {
     font-size: 9px;
@@ -3093,9 +3088,9 @@ footer .brand {
   .sidebar .brand small {
     font-size: 6px;
   }
-  .sidebar .brand-mark {
-    width: 30px;
-    height: 32px;
+  .sidebar .brand-logo {
+    width: 50px;
+    height: 46px;
   }
   .sidebar-label,
   .sidebar-bottom {
@@ -3499,10 +3494,9 @@ footer .brand {
   .game-header .brand small {
     font-size: 5px;
   }
-  .game-header .brand-mark {
-    width: 28px;
-    height: 31px;
-    font-size: 27px;
+  .game-header .brand-logo {
+    width: 43px;
+    height: 40px;
   }
   .game-header-right {
     gap: 13px;
