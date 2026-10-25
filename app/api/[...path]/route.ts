@@ -106,10 +106,9 @@ function safeName(name: string, filter: boolean) {
   return cleaned;
 }
 async function authorizedGame(code: string) {
+  await requireHost();
   const g = await getGame(code);
   if (!g) throw new Error("Room not found.");
-  const owner = await requireHost();
-  if (g.owner !== owner) throw new Error("This room belongs to another host.");
   return g;
 }
 async function handle(req: NextRequest, segments: string[]) {
@@ -152,7 +151,7 @@ async function handle(req: NextRequest, segments: string[]) {
       if (settleClock(structuredClone(g)))
         g = (await mutateGame(code, (x) => settleClock(x))).game;
       const host =
-        (await hostId()) === g.owner &&
+        !!(await hostId()) &&
         (req.nextUrl.searchParams.get("host") === "1" || action === "export");
       const session = await playerToken(code);
       const p = session
@@ -404,7 +403,6 @@ async function handle(req: NextRequest, segments: string[]) {
         })
         .parse(body);
       const { game } = await mutateGame(code, (g) => {
-        if (g.owner !== owner) throw new Error("Host access required.");
         if (g.commands.includes(input.key)) return;
         if ((g.controlRevision ?? 0) !== input.revision)
           throw new Error("The room changed. Please try again.");

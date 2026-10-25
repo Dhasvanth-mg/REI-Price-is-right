@@ -1025,6 +1025,51 @@ footer .brand {
 .recent-rooms {
   margin-top: 35px;
 }
+.resume-room {
+  margin-top: 25px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+.resume-room h2 {
+  font-size: 22px;
+  margin: 9px 0 6px;
+}
+.resume-room p {
+  font-size: 11px;
+}
+.resume-room-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.resume-room-actions input {
+  max-width: 145px;
+  letter-spacing: 2px;
+}
+@media (max-width: 1100px) {
+  .resume-room {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 600px) {
+  .resume-room {
+    padding: 22px;
+  }
+  .resume-room-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .resume-room-actions input {
+    max-width: none;
+  }
+  .resume-room-actions .button {
+    width: 100%;
+  }
+}
 .recent-rooms h2 {
   font-size: 21px;
 }

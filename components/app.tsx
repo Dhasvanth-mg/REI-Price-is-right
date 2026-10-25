@@ -749,6 +749,7 @@ function HostHome() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [rooms, setRooms] = useState<string[]>([]);
+  const [resumeCode, setResumeCode] = useState("");
   const router = useRouter();
   useEffect(() => {
     try {
@@ -876,6 +877,43 @@ function HostHome() {
           </Link>
         </div>
       </div>
+      <form
+        className="panel resume-room"
+        onSubmit={(event) => {
+          event.preventDefault();
+          localStorage.setItem(
+            "rho-rooms",
+            JSON.stringify([...new Set([resumeCode, ...rooms])].slice(0, 20)),
+          );
+          router.push("/host/" + resumeCode);
+        }}
+      >
+        <div>
+          <span className="eyebrow">ALREADY HAVE A GAME?</span>
+          <h2>Open the same room here.</h2>
+          <p>Enter its code to share admin controls from another computer.</p>
+        </div>
+        <div className="resume-room-actions">
+          <label className="sr-only" htmlFor="host-room-code">
+            Existing game room code
+          </label>
+          <input
+            id="host-room-code"
+            inputMode="numeric"
+            pattern="[0-9]{6}"
+            maxLength={6}
+            required
+            placeholder="Room code"
+            value={resumeCode}
+            onChange={(event) =>
+              setResumeCode(event.target.value.replace(/\D/g, ""))
+            }
+          />
+          <button className="button secondary">
+            Open admin controls <ArrowRight size={17} />
+          </button>
+        </div>
+      </form>
       {rooms.length > 0 && (
         <section className="recent-rooms">
           <h2>Your recent rooms</h2>
@@ -1827,6 +1865,7 @@ function HostGame({ code }: { code: string }) {
   const [name, setName] = useState("");
   const [emoji, setEmoji] = useState("🏡");
   const [bonus, setBonus] = useState(5);
+  const [adminLinkCopied, setAdminLinkCopied] = useState(false);
   async function control(action: string, extra: Record<string, unknown> = {}) {
     if (!game) return;
     setBusy(true);
@@ -1861,7 +1900,7 @@ function HostGame({ code }: { code: string }) {
   if (!game.isHost)
     return (
       <div className="center-page">
-        <h1>This is another host’s room.</h1>
+        <h1>Sign in to manage this room.</h1>
         <Link href="/host">Back to your dashboard</Link>
       </div>
     );
@@ -1898,6 +1937,30 @@ function HostGame({ code }: { code: string }) {
           </p>
         </div>
         <div className="heading-actions">
+          <button
+            className="icon-button"
+            aria-label={
+              adminLinkCopied ? "Admin link copied" : "Copy admin link"
+            }
+            title="Copy admin link"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(
+                  location.origin + "/host/" + code,
+                );
+                setAdminLinkCopied(true);
+                setTimeout(() => setAdminLinkCopied(false), 2000);
+              } catch {
+                setActionError(
+                  "Open /host/" +
+                    code +
+                    " on the other computer and sign in with the host password.",
+                );
+              }
+            }}
+          >
+            {adminLinkCopied ? <Check size={19} /> : <Copy size={19} />}
+          </button>
           <Link
             href={"/display/" + code}
             target="_blank"
